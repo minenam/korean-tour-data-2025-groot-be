@@ -1,0 +1,38 @@
+# 도메인별 하위 모듈 구조 및 책임
+
+## 주요 도메인 모듈
+
+- **auth**: 인증, 회원가입, 권한 관리
+- **course**: 지역별 생태관광 코스, 지도, 필터별 검색, 코스별 탄소 발자국
+- **carbon**: 여행 탄소 발자국 계산, 비교, 메트릭 공식
+- **gamification**: 대시보드, 스탬프, SNS 공유, 칭호/뱃지, 미션 인증, 좋아요, 마이페이지
+- **review**: 여행 코스 리뷰
+
+## 예시 파일 구조
+
+```
+/apps
+  /auth/src/main.ts
+  /course/src/main.ts
+  /carbon/src/main.ts
+  /gamification/src/main.ts
+  /review/src/main.ts
+/packages
+  /common
+  /shared
+```
+
+## 도메인 간 의존성 원칙
+
+- 각 도메인은 독립적으로 개발, 공통 로직/타입/유틸은 `/packages/common` 또는 `/packages/shared`에 위치
+- 도메인 간 직접 의존성 최소화, 필요시 공통 패키지로 추출
+- 의존성 순환 금지
+
+## 참고
+
+- [공통 규칙](mdc:nestjs-monorepo-setup.mdc)
+  description:
+  globs:
+  alwaysApply: false
+
+---

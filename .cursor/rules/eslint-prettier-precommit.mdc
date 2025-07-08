@@ -1,0 +1,25 @@
+# 커밋 전 코드 품질 및 테스트 검증 규칙
+
+- **ESLint**: 모든 TypeScript/JavaScript 파일은 커밋 전 `eslint` 검사를 통과해야 합니다.
+- **Prettier**: 코드 스타일은 반드시 `prettier`로 포맷팅되어야 하며, 포맷팅되지 않은 코드는 커밋 불가합니다.
+- **pre-commit hook**: `husky` 또는 `lint-staged` 등 pre-commit hook을 활용하여, 커밋 전에 아래 작업을 자동으로 실행합니다:
+  - `eslint --fix` 및 `prettier --write`로 코드 자동 수정
+  - 변경된 파일에 대해 `jest` 테스트(또는 전체 테스트) 실행
+  - 모든 작업이 통과해야만 커밋이 진행됩니다.
+- **항상 최신 버전의 의존성 사용을 권장**하며, 정기적으로 아래 명령어로 전체 패키지를 최신화하세요:
+  - `pnpm up --latest --recursive`
+- **설정 예시**:
+  - `.husky/pre-commit` 스크립트에 `pnpm lint && pnpm format && pnpm test` 등 명령어 추가
+  - `lint-staged`를 활용해 staged 파일만 lint/format/test 적용
+
+## 참고 파일
+
+- [ESLint 설정 예시](mdc:.eslintrc.js)
+- [Prettier 설정 예시](mdc:.prettierrc)
+- [husky 설정 예시](mdc:.husky/pre-commit)
+- [lint-staged 설정 예시](mdc:lint-staged.config.js)
+  description:
+  globs:
+  alwaysApply: false
+
+---
